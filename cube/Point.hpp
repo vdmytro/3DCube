@@ -10,7 +10,7 @@ class cubePoint
 {
 public:
 	cubePoint();
-	cubePoint(double, double, double);
+	cubePoint(double _x, double _y, double _z);
 	double getX() const;
 	double getY() const; 
 	double getZ() const;

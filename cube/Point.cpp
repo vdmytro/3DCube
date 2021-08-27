@@ -1,9 +1,14 @@
 #include "Point.hpp"
 #include "libs.hpp"
 
+cubePoint::cubePoint()
+{
+}
+
 /**********************************************/
 cubePoint::cubePoint(double _x, double _y, double _z) 
-	: Cordinates({_x,_y,_z})
+	: Cordinates({_x,_y,_z}) 
+	, Visible(true)
 {
 }
 
