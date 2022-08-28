@@ -24,6 +24,7 @@ public:
 	//ReDrawCube(HDC)
 	void SetScale(double _factor, bool _pos);
 	double GetScale();
+	const cubePoint& getPointByName(const std::string& _name) const;
 private:
 	double scale;
 	cubePoint mainPoint;

@@ -3,6 +3,8 @@
 
 cubePoint::cubePoint()
 {
+	Cordinates = { 0,0,0 };
+	Visible = true;
 }
 
 /**********************************************/

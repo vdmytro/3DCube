@@ -1,4 +1,4 @@
-#include "Cuboid.hpp"
+﻿#include "Cuboid.hpp"
 
 
 Cuboid::Cuboid() {
@@ -32,6 +32,28 @@ void Cuboid::SetScale(double _factor, bool _pos)
 double Cuboid::GetScale()
 {
 	return this->scale;
+}
+
+const cubePoint& Cuboid::getPointByName(const std::string& _name) const
+{
+	//FLU, FLD, FRU, FRD, BLU, BLD, BRU, BRD
+	if (_name == "FLU")
+		return FLU;
+	if (_name == "FLD")
+		return FLD;
+	if (_name == "FRU")
+		return FRU;
+	if (_name == "FRD")
+		return FRD;
+	if (_name == "BLU")
+		return BLU;
+	if (_name == "BLD")
+		return BLD;
+	if (_name == "BRU")
+		return BRU;
+	if (_name == "BRD")
+		return BRD;
+	return Center;
 }
 
 void 
@@ -85,17 +107,6 @@ Cuboid::DrawCube(HWND & _hWnd, HDC & _hdc, RECT & _rt)
 	LineTo(_hdc, _rt.right / 2 + (int)(this->FRD.getX()), _rt.bottom / 2 - (int)(this->FRD.getZ()));	 //+
 	LineTo(_hdc, _rt.right / 2 + (int)(this->FRU.getX()), _rt.bottom / 2 - (int)(this->FRU.getZ()));	 //+
 	LineTo(_hdc, _rt.right / 2 + (int)(this->BRU.getX()), _rt.bottom / 2 - (int)(this->BRU.getZ()));	 //-
-
-	/*
-	MoveToEx(_hdc, _rt.right / 4 + (int)this->FLU.getX(), _rt.bottom / 2 + (int)this->FLU.getY(), NULL); 
-	
-	char buf[80];
-	TextOut(_hdc, _rt.right / 4 + (int)this->FLU.getX(), _rt.bottom / 2 + (int)this->FLU.getY(), buf, wsprintf(buf, "FLU: %i , %i", (int)FLU.getX(),(int)FLU.getY()));
-	LineTo(_hdc, _rt.right / 4 + (int)this->FRU.getX(), _rt.bottom / 2 + (int)this->FRU.getY());
-	LineTo(_hdc, _rt.right / 4 + (int)this->BRU.getX(), _rt.bottom / 2 + (int)this->BRU.getY());
-	LineTo(_hdc, _rt.right / 4 + (int)this->BLU.getX(), _rt.bottom / 2 + (int)this->BLU.getY());
-	LineTo(_hdc, _rt.right / 4 + (int)this->FLU.getX(), _rt.bottom / 2 + (int)this->FLU.getY());
-	*/
 }
 
 void Cuboid::SetAngleX(double _angle) {
@@ -107,7 +118,6 @@ void Cuboid::SetAngleX(double _angle) {
 	BLD.setCord(BLD.getX() * scale, (BLD.getY() * std::cos(_angle) - BLD.getZ() * std::sin(_angle)) * scale, (BLD.getY() * std::sin(_angle) + BLD.getZ()*std::cos(_angle)) * scale);
 	BRU.setCord(BRU.getX() * scale, (BRU.getY() * std::cos(_angle) - BRU.getZ() * std::sin(_angle)) * scale, (BRU.getY() * std::sin(_angle) + BRU.getZ()*std::cos(_angle)) * scale);
 	BRD.setCord(BRD.getX() * scale, (BRD.getY() * std::cos(_angle) - BRD.getZ() * std::sin(_angle)) * scale, (BRD.getY() * std::sin(_angle) + BRD.getZ()*std::cos(_angle)) * scale);
-	
 }
 
 void Cuboid::SetAngleY(double _angle) {
