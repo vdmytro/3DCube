@@ -18,15 +18,18 @@ Cuboid::Cuboid() {
 
 Cuboid::~Cuboid() = default;
 
-void Cuboid::SetScale(double _factor, bool _pos)
+void Cuboid::SetScale(bool _factor)
 {
-	if (scale > 0) {
-		if(_pos)
-			scale += _factor;
-		else
-			scale -= _factor;
+	if(_factor)
+		scale = 1.1;
+	else
+		scale = 0.9;
+	
+	SetAngleX(0);
+	SetAngleY(0);
+	SetAngleZ(0);
 
-	}	
+	scale = 1;
 }
 
 double Cuboid::GetScale()
@@ -56,8 +59,8 @@ const cubePoint& Cuboid::getPointByName(const std::string& _name) const
 	return Center;
 }
 
-void 
-Cuboid::RotateCube( SHORT & _X, SHORT & _Y, SHORT & _TimeX, SHORT & _TimeY) {
+void Cuboid::RotateCube(SHORT & _X, SHORT & _Y,SHORT& _Z, SHORT & _TimeX, SHORT & _TimeY, SHORT& _TimeZ) 
+{
 	double distance = 1.0;
 	double Step = 0.02;
 	if (_X < _TimeX) {
@@ -81,6 +84,7 @@ Cuboid::RotateCube( SHORT & _X, SHORT & _Y, SHORT & _TimeX, SHORT & _TimeY) {
 	{
 		this->SetAngleX(Step * -1);
 	}
+	
 }
 
 void

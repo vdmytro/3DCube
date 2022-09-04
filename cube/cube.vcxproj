@@ -75,12 +75,16 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -106,6 +110,8 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile />
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -141,6 +147,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -150,23 +158,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="cube.h" />
-    <ClInclude Include="Cuboid.hpp" />
-    <ClInclude Include="libs.hpp" />
-    <ClInclude Include="Point.hpp" />
-    <ClInclude Include="Resource.h" />
+    <ClInclude Include="src\cube.h" />
+    <ClInclude Include="src\Cuboid.hpp" />
+    <ClInclude Include="src\libs.hpp" />
+    <ClInclude Include="src\Point.hpp" />
+    <ClInclude Include="src\Resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cube.cpp" />
-    <ClCompile Include="Cuboid.cpp" />
-    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="src\cube.cpp" />
+    <ClCompile Include="src\Cuboid.cpp" />
+    <ClCompile Include="src\Point.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="cube.rc" />
+    <ResourceCompile Include="src\cube.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="cube.ico" />
-    <Image Include="small.ico" />
+    <Image Include="src\cube.ico" />
+    <Image Include="src\small.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

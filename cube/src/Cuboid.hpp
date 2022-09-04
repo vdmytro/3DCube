@@ -14,7 +14,8 @@ public:
 	void SetAngleX(double _angle);
 	void SetAngleY(double _angle);
 	void SetAngleZ(double _angle);
-	void RotateCube(SHORT & _X, SHORT & _Y, SHORT & _TimeX, SHORT & _TimeY);
+	void RotateCube( SHORT & _X, SHORT & _Y, SHORT& _Z,
+		 SHORT & _TimeX,  SHORT & _TimeY,  SHORT& _TimeZ);
 	double getAngle() const;
 	// test methods with static coordinates
 	//void VerticalMove();
@@ -22,7 +23,7 @@ public:
 	//void HorizontalMoveRight();
 	cubePoint getCP();
 	//ReDrawCube(HDC)
-	void SetScale(double _factor, bool _pos);
+	void SetScale(bool _factor);
 	double GetScale();
 	const cubePoint& getPointByName(const std::string& _name) const;
 private:
