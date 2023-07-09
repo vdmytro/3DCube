@@ -23,11 +23,9 @@ public:
 	//void HorizontalMoveRight();
 	cubePoint getCP();
 	//ReDrawCube(HDC)
-	void SetScale(bool _factor);
-	double GetScale();
+	void SetScale(double _scale);
 	const cubePoint& getPointByName(const std::string& _name) const;
 private:
-	double scale;
 	cubePoint mainPoint;
 	cubePoint FLU, FLD, FRU, FRD, BLU, BLD, BRU, BRD, Center;
 	double Current_angle;

@@ -1,10 +1,10 @@
 #pragma once
 
 #define WIN32_LEAN_AND_MEAN   
-// Файлы заголовков Windows:
+// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Windows:
 #include <windows.h>
 
-// Файлы заголовков C RunTime
+// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ C RunTime
 #include <algorithm>
 #include <stdlib.h>
 #include <malloc.h>
@@ -13,7 +13,7 @@
 #include <thread>
 #include <math.h>
 #include <iostream>
-//пользовательские заголовки
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 #include "Cuboid.hpp"
 
 

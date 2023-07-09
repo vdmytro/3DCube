@@ -163,11 +163,13 @@
     <ClInclude Include="src\libs.hpp" />
     <ClInclude Include="src\Point.hpp" />
     <ClInclude Include="src\Resource.h" />
+    <ClInclude Include="src\Vector3d.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\cube.cpp" />
     <ClCompile Include="src\Cuboid.cpp" />
     <ClCompile Include="src\Point.cpp" />
+    <ClCompile Include="src\Vector3d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="src\cube.rc" />

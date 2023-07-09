@@ -1,10 +1,7 @@
 #pragma once
-
+#include "Vector3d.h"
 
 /***********************************************************************************/
-struct cord {
-	double x, y, z;
-};
 
 class cubePoint
 {
@@ -18,9 +15,11 @@ public:
 	bool isVisible();
 	void setCord(double, double, double);
 	~cubePoint();
+	cubePoint& operator*=(double _num);
+	void Rotate(double _angle, Vector3d _axis);
 
 private:
-	cord Cordinates;
+	Vector3d Cordinates;
 	bool Visible;
 
 };
@@ -28,19 +27,19 @@ private:
 inline
 double cubePoint::getX() const
 {
-	return this->Cordinates.x;
+	return this->Cordinates.X; 
 }
 
 inline
 double cubePoint::getY() const
 {
-	return this->Cordinates.y;
+	return this->Cordinates.Y;
 }
 
 inline
 double cubePoint::getZ() const
 {
-	return this->Cordinates.z;
+	return this->Cordinates.Z;
 }
 
 

@@ -2,39 +2,31 @@
 
 
 Cuboid::Cuboid() {
-	scale = 1;
 	mainPoint = { 0,0,0 };
-	FLU = { -50 * scale, 50 * scale, 50 * scale };
-	FLD = { -50 * scale, 50 * scale,-50 * scale };
-	FRU = {  50 * scale, 50 * scale, 50 * scale };
-	FRD = {  50 * scale, 50 * scale,-50 * scale };
-	BLU = { -50 * scale,-50 * scale, 50 * scale };
-	BLD = { -50 * scale,-50 * scale,-50 * scale };
-	BRU = {  50 * scale,-50 * scale, 50 * scale };
-	BRD = {  50 * scale,-50 * scale,-50 * scale };
+	FLU = { -50 , 50 , 50  };
+	FLD = { -50 , 50 ,-50  };
+	FRU = {  50 , 50 , 50  };
+	FRD = {  50 , 50 ,-50  };
+	BLU = { -50 ,-50 , 50  };
+	BLD = { -50 ,-50 ,-50  };
+	BRU = {  50 ,-50 , 50  };
+	BRD = {  50 ,-50 ,-50  };
 	Center = { 0,0,0};
 	Current_angle = 0;
 }
 
 Cuboid::~Cuboid() = default;
 
-void Cuboid::SetScale(bool _factor)
+void Cuboid::SetScale(double _scale)
 {
-	if(_factor)
-		scale = 1.1;
-	else
-		scale = 0.9;
-	
-	SetAngleX(0);
-	SetAngleY(0);
-	SetAngleZ(0);
-
-	scale = 1;
-}
-
-double Cuboid::GetScale()
-{
-	return this->scale;
+	FLU *= _scale;
+	FLD *= _scale;
+	FRU *= _scale;
+	FRD *= _scale;
+	BLU *= _scale;
+	BLD *= _scale;
+	BRU *= _scale;
+	BRD *= _scale;
 }
 
 const cubePoint& Cuboid::getPointByName(const std::string& _name) const
@@ -114,34 +106,34 @@ Cuboid::DrawCube(HWND & _hWnd, HDC & _hdc, RECT & _rt)
 }
 
 void Cuboid::SetAngleX(double _angle) {
-	FLU.setCord(FLU.getX() * scale, (FLU.getY() * std::cos(_angle) - FLU.getZ() * std::sin(_angle)) * scale, (FLU.getY() * std::sin(_angle) + FLU.getZ()*std::cos(_angle)) * scale);
-	FLD.setCord(FLD.getX() * scale, (FLD.getY() * std::cos(_angle) - FLD.getZ() * std::sin(_angle)) * scale, (FLD.getY() * std::sin(_angle) + FLD.getZ()*std::cos(_angle)) * scale);
-	FRU.setCord(FRU.getX() * scale, (FRU.getY() * std::cos(_angle) - FRU.getZ() * std::sin(_angle)) * scale, (FRU.getY() * std::sin(_angle) + FRU.getZ()*std::cos(_angle)) * scale);
-	FRD.setCord(FRD.getX() * scale, (FRD.getY() * std::cos(_angle) - FRD.getZ() * std::sin(_angle)) * scale, (FRD.getY() * std::sin(_angle) + FRD.getZ()*std::cos(_angle)) * scale);
-	BLU.setCord(BLU.getX() * scale, (BLU.getY() * std::cos(_angle) - BLU.getZ() * std::sin(_angle)) * scale, (BLU.getY() * std::sin(_angle) + BLU.getZ()*std::cos(_angle)) * scale);
-	BLD.setCord(BLD.getX() * scale, (BLD.getY() * std::cos(_angle) - BLD.getZ() * std::sin(_angle)) * scale, (BLD.getY() * std::sin(_angle) + BLD.getZ()*std::cos(_angle)) * scale);
-	BRU.setCord(BRU.getX() * scale, (BRU.getY() * std::cos(_angle) - BRU.getZ() * std::sin(_angle)) * scale, (BRU.getY() * std::sin(_angle) + BRU.getZ()*std::cos(_angle)) * scale);
-	BRD.setCord(BRD.getX() * scale, (BRD.getY() * std::cos(_angle) - BRD.getZ() * std::sin(_angle)) * scale, (BRD.getY() * std::sin(_angle) + BRD.getZ()*std::cos(_angle)) * scale);
+	FLU.Rotate(_angle,VectorX);
+	FLD.Rotate(_angle, VectorX);
+	FRU.Rotate(_angle, VectorX);
+	FRD.Rotate(_angle, VectorX);
+	BLU.Rotate(_angle, VectorX);
+	BLD.Rotate(_angle, VectorX);
+	BRU.Rotate(_angle, VectorX);
+	BRD.Rotate(_angle, VectorX);
 }
 
 void Cuboid::SetAngleY(double _angle) {
-	FLU.setCord((FLU.getX() * std::cos(_angle) - FLU.getZ() * std::sin(_angle)) * scale, FLU.getY() * scale, (FLU.getX() * std::sin(_angle) + FLU.getZ()*std::cos(_angle)) * scale);
-	FLD.setCord((FLD.getX() * std::cos(_angle) - FLD.getZ() * std::sin(_angle)) * scale, FLD.getY() * scale, (FLD.getX() * std::sin(_angle) + FLD.getZ()*std::cos(_angle)) * scale);
-	FRU.setCord((FRU.getX() * std::cos(_angle) - FRU.getZ() * std::sin(_angle)) * scale, FRU.getY() * scale, (FRU.getX() * std::sin(_angle) + FRU.getZ()*std::cos(_angle)) * scale);
-	FRD.setCord((FRD.getX() * std::cos(_angle) - FRD.getZ() * std::sin(_angle)) * scale, FRD.getY() * scale, (FRD.getX() * std::sin(_angle) + FRD.getZ()*std::cos(_angle)) * scale);
-	BLU.setCord((BLU.getX() * std::cos(_angle) - BLU.getZ() * std::sin(_angle)) * scale, BLU.getY() * scale, (BLU.getX() * std::sin(_angle) + BLU.getZ()*std::cos(_angle)) * scale);
-	BLD.setCord((BLD.getX() * std::cos(_angle) - BLD.getZ() * std::sin(_angle)) * scale, BLD.getY() * scale, (BLD.getX() * std::sin(_angle) + BLD.getZ()*std::cos(_angle)) * scale);
-	BRU.setCord((BRU.getX() * std::cos(_angle) - BRU.getZ() * std::sin(_angle)) * scale, BRU.getY() * scale, (BRU.getX() * std::sin(_angle) + BRU.getZ()*std::cos(_angle)) * scale);
-	BRD.setCord((BRD.getX() * std::cos(_angle) - BRD.getZ() * std::sin(_angle)) * scale, BRD.getY() * scale, (BRD.getX() * std::sin(_angle) + BRD.getZ()*std::cos(_angle)) * scale);
+	FLU.Rotate(_angle,VectorY);
+	FLD.Rotate(_angle,VectorY);
+	FRU.Rotate(_angle,VectorY);
+	FRD.Rotate(_angle,VectorY);
+	BLU.Rotate(_angle,VectorY);
+	BLD.Rotate(_angle,VectorY);
+	BRU.Rotate(_angle,VectorY);
+	BRD.Rotate(_angle,VectorY);
 }
 
 void Cuboid::SetAngleZ(double _angle) {
-	FLU.setCord((FLU.getX() * std::cos(_angle) - FLU.getY() * std::sin(_angle)) * scale, (FLU.getX() * std::sin(_angle) + FLU.getY()*std::cos(_angle)) * scale, FLU.getZ()* scale);
-	FLD.setCord((FLD.getX() * std::cos(_angle) - FLD.getY() * std::sin(_angle)) * scale, (FLD.getX() * std::sin(_angle) + FLD.getY()*std::cos(_angle)) * scale, FLD.getZ()* scale);
-	FRU.setCord((FRU.getX() * std::cos(_angle) - FRU.getY() * std::sin(_angle)) * scale, (FRU.getX() * std::sin(_angle) + FRU.getY()*std::cos(_angle)) * scale, FRU.getZ()* scale);
-	FRD.setCord((FRD.getX() * std::cos(_angle) - FRD.getY() * std::sin(_angle)) * scale, (FRD.getX() * std::sin(_angle) + FRD.getY()*std::cos(_angle)) * scale, FRD.getZ()* scale);
-	BLU.setCord((BLU.getX() * std::cos(_angle) - BLU.getY() * std::sin(_angle)) * scale, (BLU.getX() * std::sin(_angle) + BLU.getY()*std::cos(_angle)) * scale, BLU.getZ()* scale);
-	BLD.setCord((BLD.getX() * std::cos(_angle) - BLD.getY() * std::sin(_angle)) * scale, (BLD.getX() * std::sin(_angle) + BLD.getY()*std::cos(_angle)) * scale, BLD.getZ()* scale);
-	BRU.setCord((BRU.getX() * std::cos(_angle) - BRU.getY() * std::sin(_angle)) * scale, (BRU.getX() * std::sin(_angle) + BRU.getY()*std::cos(_angle)) * scale, BRU.getZ()* scale);
-	BRD.setCord((BRD.getX() * std::cos(_angle) - BRD.getY() * std::sin(_angle)) * scale, (BRD.getX() * std::sin(_angle) + BRD.getY()*std::cos(_angle)) * scale, BRD.getZ()* scale);
+	FLU.Rotate(_angle,VectorZ);
+	FLD.Rotate(_angle,VectorZ);
+	FRU.Rotate(_angle,VectorZ);
+	FRD.Rotate(_angle,VectorZ);
+	BLU.Rotate(_angle,VectorZ);
+	BLD.Rotate(_angle,VectorZ);
+	BRU.Rotate(_angle,VectorZ);
+	BRD.Rotate(_angle,VectorZ);
 }
