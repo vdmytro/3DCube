@@ -160,7 +160,6 @@
   <ItemGroup>
     <ClInclude Include="src\cube.h" />
     <ClInclude Include="src\Cuboid.hpp" />
-    <ClInclude Include="src\libs.hpp" />
     <ClInclude Include="src\Point.hpp" />
     <ClInclude Include="src\Resource.h" />
     <ClInclude Include="src\Vector3d.h" />

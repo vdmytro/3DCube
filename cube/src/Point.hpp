@@ -1,5 +1,6 @@
 #pragma once
-#include "Vector3d.h"
+
+struct Vector3d;
 
 /***********************************************************************************/
 
@@ -19,31 +20,10 @@ public:
 	void Rotate(double _angle, Vector3d _axis);
 
 private:
-	Vector3d Cordinates;
+	Vector3d* Cordinates; 
 	bool Visible;
 
 };
-
-inline
-double cubePoint::getX() const
-{
-	return this->Cordinates.X; 
-}
-
-inline
-double cubePoint::getY() const
-{
-	return this->Cordinates.Y;
-}
-
-inline
-double cubePoint::getZ() const
-{
-	return this->Cordinates.Z;
-}
-
-
-
 
 /***********************************************************************************/
 

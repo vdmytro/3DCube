@@ -51,7 +51,7 @@ Vector3d Vector3d::operator*(double value) const
 
 Vector3d Vector3d::operator/(double value) const
 {
-	if (value != 0.f) 
+	if (value != 0.0) 
 	{
 		Vector3d newVec(this->X / value, this->Y / value, this->Z / value);
 		return *this;
@@ -113,20 +113,24 @@ Vector3d Vector3d::InvertNorm() const
 
 Vector3d& Vector3d::Rotate(double angle,Vector3d axis)
 {
+	double originalX = X;
+	double originalY = Y;
+	double originalZ = Z;
+
 	if (axis == VectorX)
 	{
-		Y = Y * cos(angle) - Z * sin(angle);
-		Z = Y * sin(angle) + Z * cos(angle);
+		Y = originalY * cos(angle) - originalZ * sin(angle);
+		Z = originalY * sin(angle) + originalZ * cos(angle);
 	}
-	if (axis == VectorY)
+	else if (axis == VectorY)
 	{
-		X = X * cos(angle) - Z * sin(angle);
-		Z = X * sin(angle) + Z * cos(angle);
+		X = originalX * cos(angle) - originalZ * sin(angle);
+		Z = originalX * sin(angle) + originalZ * cos(angle);
 	}
-	if (axis == VectorZ)
+	else if (axis == VectorZ)
 	{
-		X = X * cos(angle) - Y * sin(angle);
-		Y = X * sin(angle) + Y * cos(angle);
+		X = originalX * cos(angle) - originalY * sin(angle);
+		Y = originalX * sin(angle) + originalY * cos(angle);
 	}
 
 	return *this;

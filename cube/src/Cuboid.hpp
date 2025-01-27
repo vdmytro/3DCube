@@ -1,8 +1,9 @@
 #pragma once
-#include "libs.hpp"
-#include "Point.hpp"
 
+class cubePoint;
 
+#include <Windows.h>
+#include <string>
 
 class Cuboid
 {
@@ -10,7 +11,7 @@ public:
 	Cuboid();
 	~Cuboid();
 	void DrawCube(HWND&,HDC&,RECT&);
-	// rotate methosds using matrix
+	// rotate methods using matrix
 	void SetAngleX(double _angle);
 	void SetAngleY(double _angle);
 	void SetAngleZ(double _angle);
@@ -21,25 +22,12 @@ public:
 	//void VerticalMove();
 	//void HorizontalMoveLeft();
 	//void HorizontalMoveRight();
-	cubePoint getCP();
+	const cubePoint* getCP();
 	//ReDrawCube(HDC)
 	void SetScale(double _scale);
 	const cubePoint& getPointByName(const std::string& _name) const;
 private:
-	cubePoint mainPoint;
-	cubePoint FLU, FLD, FRU, FRD, BLU, BLD, BRU, BRD, Center;
+	cubePoint* mainPoint;
+	cubePoint* FLU, *FLD, *FRU, *FRD, *BLU, *BLD, *BRU, *BRD, *Center;
 	double Current_angle;
 };
-
-inline
-cubePoint Cuboid::getCP()
-{
-	return FLU;
-}
-inline
-double Cuboid::getAngle() const {
-	return Current_angle;
-}
-
-
-
