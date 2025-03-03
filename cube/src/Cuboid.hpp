@@ -1,9 +1,10 @@
 #pragma once
 
-class cubePoint;
-
 #include <Windows.h>
 #include <string>
+#include <vector>
+
+#include "Point.hpp"
 
 class Cuboid
 {
@@ -22,12 +23,11 @@ public:
 	//void VerticalMove();
 	//void HorizontalMoveLeft();
 	//void HorizontalMoveRight();
-	const cubePoint* getCP();
+	const cubePoint& getCP();
 	//ReDrawCube(HDC)
 	void SetScale(double _scale);
-	const cubePoint& getPointByName(const std::string& _name) const;
 private:
-	cubePoint* mainPoint;
-	cubePoint* FLU, *FLD, *FRU, *FRD, *BLU, *BLD, *BRU, *BRD, *Center;
+	cubePoint mainPoint;
+	std::vector<cubePoint> pointsVector;
 	double Current_angle;
 };

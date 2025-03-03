@@ -91,9 +91,30 @@ Vector3d& Vector3d::operator*=(double value)
 	return *this;
 }
 
+double Vector3d::DotProduct(const Vector3d& vec) const
+{
+	double result = X * vec.X + Y * vec.Y + Z * vec.Z;
+	return 0.0;
+}
+
+Vector3d Vector3d::CrossProduct(const Vector3d& vec) const
+{
+	//X = (Y1 * Y2) - ( Z1 * Y2 )
+	//Y = (Z1 * X2) - ( X1 * Z2 )
+	//Z = (X1 * Y2) - ( Y1 * X2 )
+	Vector3d newVec( Y * vec.Y - Z * vec.Y, Z * vec.X - X * vec.Z, X * vec.Y - Y * vec.X );
+	
+	return newVec;
+}
+
 double Vector3d::getSize() const
 {
 	return sqrt((X * X) + (Y * Y) + (Z * Z));
+}
+
+double Vector3d::getSquaredSize() const
+{
+	return (X * X) + (Y * Y) + (Z * Z);
 }
 
 Vector3d Vector3d::Norm() const
@@ -107,27 +128,42 @@ Vector3d Vector3d::Norm() const
 Vector3d Vector3d::InvertNorm() const
 {
 	const double size = getSize();
-	const Vector3d invnorm = *this / size;
-	return invnorm;
+	const Vector3d invNorm = *this / size;
+	return invNorm;
 }
 
-Vector3d& Vector3d::Rotate(double angle,Vector3d axis)
+Vector3d& Vector3d::Rotate(double angle, Vector3dAxis axis)
 {
 	double originalX = X;
 	double originalY = Y;
 	double originalZ = Z;
 
-	if (axis == VectorX)
+	/* Used rotation matrix
+	* X:
+	* /	1	0		 0		\
+	* |	0	cos(a)	-sin(a) |
+	* \ 0	sin(a)	 cos(a) /
+	* Y:
+	* /	cos(a)	0	-sin(a) \
+	* |	0		1	 0		|
+	* \ sin()	0	 cos(a) /
+	* Z:
+	* /	cos(a)	0	-sin(a) \
+	* |	0		1	 0		|
+	* \ sin()	0	 cos(a) /
+	*/
+
+	if (axis == Vector3dAxis::X)
 	{
 		Y = originalY * cos(angle) - originalZ * sin(angle);
 		Z = originalY * sin(angle) + originalZ * cos(angle);
 	}
-	else if (axis == VectorY)
+	else if (axis == Vector3dAxis::Y)
 	{
 		X = originalX * cos(angle) - originalZ * sin(angle);
 		Z = originalX * sin(angle) + originalZ * cos(angle);
 	}
-	else if (axis == VectorZ)
+	else if (axis == Vector3dAxis::Z)
 	{
 		X = originalX * cos(angle) - originalY * sin(angle);
 		Y = originalX * sin(angle) + originalY * cos(angle);

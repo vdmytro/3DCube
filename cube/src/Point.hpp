@@ -1,6 +1,6 @@
 #pragma once
 
-struct Vector3d;
+#include "Vector3d.h"
 
 /***********************************************************************************/
 
@@ -17,11 +17,14 @@ public:
 	void setCord(double, double, double);
 	~cubePoint();
 	cubePoint& operator*=(double _num);
-	void Rotate(double _angle, Vector3d _axis);
+	void Rotate(double _angle, Vector3dAxis _axis);
+	bool operator==(const cubePoint& point);
+	bool operator!=(const cubePoint& point);
 
 private:
-	Vector3d* Cordinates; 
+	Vector3d Cordinates; 
 	bool Visible;
+	int m_ID = 0;
 
 };
 

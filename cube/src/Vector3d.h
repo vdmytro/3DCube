@@ -1,5 +1,9 @@
 #pragma once
 
+enum Vector3dAxis {
+	X,Y,Z
+};
+
 struct Vector3d
 {
 	double X = 0.0, Y = 0.0, Z = 0.0;
@@ -22,11 +26,15 @@ struct Vector3d
 	Vector3d& operator+=(double value);
 	Vector3d& operator*=(double value);
 	//---------------------------------------------------------
+	double DotProduct(const Vector3d& vec) const;
+	Vector3d CrossProduct(const Vector3d& vec) const;
+
 	double getSize() const;
+	double getSquaredSize() const;
 	Vector3d Norm() const;
 	Vector3d InvertNorm() const;
 	//---------------------------------------------------------
-	Vector3d& Rotate(double angle,Vector3d axis);
+	Vector3d& Rotate(double angle, Vector3dAxis axisType);
 };
 
 static const Vector3d VectorX{ 1.0,0.0,0.0 };
