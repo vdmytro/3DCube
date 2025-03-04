@@ -4,27 +4,25 @@
 
 /***********************************************************************************/
 
-class cubePoint
+class Point
 {
 public:
-	cubePoint();
-	cubePoint(double _x, double _y, double _z);
+	Point();
+	Point(double _x, double _y, double _z);
 	double getX() const;
 	double getY() const; 
 	double getZ() const;
-	double getToC(cubePoint&);
+	double getToC(Point&);
 	bool isVisible();
 	void setCord(double, double, double);
-	~cubePoint();
-	cubePoint& operator*=(double _num);
+	~Point();
+	Point& operator*=(double _num);
+	Point& operator=(const Point& point);
 	void Rotate(double _angle, Vector3dAxis _axis);
-	bool operator==(const cubePoint& point);
-	bool operator!=(const cubePoint& point);
 
 private:
 	Vector3d Cordinates; 
 	bool Visible;
-	int m_ID = 0;
 
 };
 

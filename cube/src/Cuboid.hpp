@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "Point.hpp"
+#include "Polygon.h"
 
 class Cuboid
 {
@@ -23,11 +24,12 @@ public:
 	//void VerticalMove();
 	//void HorizontalMoveLeft();
 	//void HorizontalMoveRight();
-	const cubePoint& getCP();
+	const Point& getCP();
 	//ReDrawCube(HDC)
 	void SetScale(double _scale);
 private:
-	cubePoint mainPoint;
-	std::vector<cubePoint> pointsVector;
+	Point mainPoint;
+	std::vector<Point> pointsVector;
+	std::vector<Render::Polygon> polygonsVector;
 	double Current_angle;
 };

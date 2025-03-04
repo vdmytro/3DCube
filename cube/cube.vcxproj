@@ -161,16 +161,18 @@
     <ClInclude Include="src\cube.h" />
     <ClInclude Include="src\Cuboid.hpp" />
     <ClInclude Include="src\Point.hpp" />
+    <ClInclude Include="src\Polygon.h" />
     <ClInclude Include="src\Resource.h" />
     <ClInclude Include="src\Vector3d.h" />
     <ClInclude Include="src\Vector4d.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Polygon.cpp" />
     <ClCompile Include="src\cube.cpp" />
     <ClCompile Include="src\Cuboid.cpp" />
     <ClCompile Include="src\Point.cpp" />
     <ClCompile Include="src\Vector3d.cpp" />
-    <ClCompile Include="Vector4d.cpp" />
+    <ClCompile Include="src\Vector4d.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="src\cube.rc" />

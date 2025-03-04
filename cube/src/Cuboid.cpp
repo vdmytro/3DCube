@@ -3,20 +3,40 @@
 #include "Cuboid.hpp"
 #include <string>
 #include <math.h>
-#include <windows.h>
 
 
 Cuboid::Cuboid() {
-	mainPoint = cubePoint(  0.0 , 0.0  ,  0.0 );
+	mainPoint = Point(  0.0 , 0.0  ,  0.0 );
+	pointsVector.emplace_back(0.0, 0.0, 0.0);
 	pointsVector.emplace_back(-50.0, 50.0, -50.0);
 	pointsVector.emplace_back(-50.0, 50.0, 50.0);
 	pointsVector.emplace_back(50.0, 50.0, 50.0);
+
 	pointsVector.emplace_back(50.0, 50.0, -50.0);
 	pointsVector.emplace_back(-50.0, -50.0, 50.0);
 	pointsVector.emplace_back(-50.0, -50.0, -50.0);
+
 	pointsVector.emplace_back(50.0, -50.0, 50.0);
 	pointsVector.emplace_back(50.0, -50.0, -50.0);
-	pointsVector.emplace_back(0.0, 0.0, 0.0);
+
+	polygonsVector.emplace_back(pointsVector[1], pointsVector[2], pointsVector[4]);
+	polygonsVector.emplace_back(pointsVector[2], pointsVector[3], pointsVector[4]);
+
+	polygonsVector.emplace_back(pointsVector[2], pointsVector[5], pointsVector[7]);
+	polygonsVector.emplace_back(pointsVector[2], pointsVector[7], pointsVector[3]);
+
+	polygonsVector.emplace_back(pointsVector[2], pointsVector[5], pointsVector[6]);
+	polygonsVector.emplace_back(pointsVector[2], pointsVector[6], pointsVector[1]);
+
+	polygonsVector.emplace_back(pointsVector[1], pointsVector[6], pointsVector[8]);
+	polygonsVector.emplace_back(pointsVector[1], pointsVector[8], pointsVector[4]);
+
+	polygonsVector.emplace_back(pointsVector[6], pointsVector[5], pointsVector[8]);
+	polygonsVector.emplace_back(pointsVector[5], pointsVector[7], pointsVector[8]);
+
+	polygonsVector.emplace_back(pointsVector[8], pointsVector[3], pointsVector[7]);
+	polygonsVector.emplace_back(pointsVector[8], pointsVector[4], pointsVector[3]);
+
 	Current_angle = 0.0;
 }
 
@@ -27,7 +47,7 @@ Cuboid::~Cuboid()
 
 void Cuboid::SetScale(double _scale)
 {
-	for (cubePoint& point : pointsVector)
+	for (Point& point : pointsVector)
 	{
 		point *= _scale;
 	}
@@ -64,63 +84,34 @@ void Cuboid::RotateCube(SHORT & _X, SHORT & _Y,SHORT& _Z, SHORT & _TimeX, SHORT 
 
 void Cuboid::DrawCube(HWND & _hWnd, HDC & _hdc, RECT & _rt)
 {	
-	MoveToEx(_hdc, static_cast<int>((static_cast<double>(_rt.right) / 2.0 + mainPoint.getX())), static_cast<int>((static_cast<double>(_rt.bottom) / 2.0 - mainPoint.getZ())), NULL); //+
-	for (cubePoint point1 : pointsVector)
+	for (Render::Polygon& polygon : polygonsVector)
 	{
-		for (cubePoint point2 : pointsVector)
-		{
-			if (point1 != point2)
-			{
-				LineTo(_hdc, static_cast<int>((static_cast<double>(_rt.right) / 2.0 + point1.getX())), static_cast<int>((static_cast<double>(_rt.bottom) / 2.0 - point1.getZ())));
-				LineTo(_hdc, static_cast<int>((static_cast<double>(_rt.right) / 2.0 + point2.getX())), static_cast<int>((static_cast<double>(_rt.bottom) / 2.0 - point2.getZ())));
-				LineTo(_hdc, static_cast<int>((static_cast<double>(_rt.right) / 2.0 + point1.getX())), static_cast<int>((static_cast<double>(_rt.bottom) / 2.0 - point1.getZ())));
-			}
-		}
+		polygon.Draw(_hWnd, _hdc, _rt);
 	}
-
-	//LineTo(_hdc, static_cast<int>(( static_cast<double>(_rt.right) / 2.0 + FRU->getX())), static_cast<int>(( static_cast<double>(_rt.bottom) / 2.0 - FRU->getZ())));	 //+
-	//LineTo(_hdc, static_cast<int>(( static_cast<double>(_rt.right) / 2.0 + FRD->getX())), static_cast<int>(( static_cast<double>(_rt.bottom) / 2.0 - FRD->getZ())));	 //+
-	//LineTo(_hdc, static_cast<int>(( static_cast<double>(_rt.right) / 2.0 + FLD->getX())), static_cast<int>(( static_cast<double>(_rt.bottom) / 2.0 - FLD->getZ())));	 //+
-	//LineTo(_hdc, static_cast<int>(( static_cast<double>(_rt.right) / 2.0 + FLU->getX())), static_cast<int>(( static_cast<double>(_rt.bottom) / 2.0 - FLU->getZ())));	 //+
-
-	//LineTo(_hdc, static_cast<int>(( static_cast<double>(_rt.right) / 2.0 + BLU->getX())), static_cast<int>(( static_cast<double>(_rt.bottom) / 2.0 - BLU->getZ())));	 //-
-	//LineTo(_hdc, static_cast<int>(( static_cast<double>(_rt.right) / 2.0 + BLD->getX())), static_cast<int>(( static_cast<double>(_rt.bottom) / 2.0 - BLD->getZ())));	 //-
-	//LineTo(_hdc, static_cast<int>(( static_cast<double>(_rt.right) / 2.0 + FLD->getX())), static_cast<int>(( static_cast<double>(_rt.bottom) / 2.0 - FLD->getZ())));	 //+
-	//LineTo(_hdc, static_cast<int>(( static_cast<double>(_rt.right) / 2.0 + FRD->getX())), static_cast<int>(( static_cast<double>(_rt.bottom) / 2.0 - FRD->getZ())));	 //+
-
-	//LineTo(_hdc, static_cast<int>(( static_cast<double>(_rt.right) / 2.0 + BRD->getX())), static_cast<int>(( static_cast<double>(_rt.bottom) / 2.0 - BRD->getZ())));	 //-
-	//LineTo(_hdc, static_cast<int>(( static_cast<double>(_rt.right) / 2.0 + BLD->getX())), static_cast<int>(( static_cast<double>(_rt.bottom) / 2.0 - BLD->getZ())));	 //-
-	//LineTo(_hdc, static_cast<int>(( static_cast<double>(_rt.right) / 2.0 + BLU->getX())), static_cast<int>(( static_cast<double>(_rt.bottom) / 2.0 - BLU->getZ())));	 //-
-	//LineTo(_hdc, static_cast<int>(( static_cast<double>(_rt.right) / 2.0 + BRU->getX())), static_cast<int>(( static_cast<double>(_rt.bottom) / 2.0 - BRU->getZ())));	 //-
-	//LineTo(_hdc, static_cast<int>(( static_cast<double>(_rt.right) / 2.0 + BRD->getX())), static_cast<int>(( static_cast<double>(_rt.bottom) / 2.0 - BRD->getZ())));	 //-
-
-	//LineTo(_hdc, static_cast<int>((static_cast<double>(_rt.right) / 2.0 + FRD->getX())), static_cast<int>((static_cast<double>(_rt.bottom) / 2.0 - FRD->getZ())));	 //+
-	//LineTo(_hdc, static_cast<int>((static_cast<double>(_rt.right) / 2.0 + FRU->getX())), static_cast<int>((static_cast<double>(_rt.bottom) / 2.0 - FRU->getZ())));	 //+
-	//LineTo(_hdc, static_cast<int>((static_cast<double>(_rt.right) / 2.0 + BRU->getX())), static_cast<int>((static_cast<double>(_rt.bottom) / 2.0 - BRU->getZ())));	 //-
 }
 
 void Cuboid::SetAngleX(double _angle) {
-	for (cubePoint& point : pointsVector)
+	for (Point& point : pointsVector)
 	{
 		point.Rotate(_angle, Vector3dAxis::X);
 	}
 }
 
 void Cuboid::SetAngleY(double _angle) {
-	for (cubePoint& point : pointsVector)
+	for (Point& point : pointsVector)
 	{
 		point.Rotate(_angle, Vector3dAxis::Y);
 	}
 }
 
 void Cuboid::SetAngleZ(double _angle) {
-	for (cubePoint& point : pointsVector)
+	for (Point& point : pointsVector)
 	{
 		point.Rotate(_angle, Vector3dAxis::Z);
 	}
 }
 
-const cubePoint& Cuboid::getCP()
+const Point& Cuboid::getCP()
 {
 	return pointsVector[0];
 }
