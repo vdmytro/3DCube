@@ -60,14 +60,14 @@ void Cuboid::RotateCube(SHORT & _X, SHORT & _Y,SHORT& _Z, SHORT & _TimeX, SHORT 
 	double Step = 0.02;
 	if (_X < _TimeX) {
 
-		SetAngleZ(Step);
+		SetAngleY(Step);
 		if (Current_angle >= 360.0)
 			Current_angle = 0.0;
 		Current_angle += (Step * 180.0 / M_PI);
 	}
 	else if (_X > _TimeX) {
 
-		SetAngleZ(Step * -1.0);
+		SetAngleY(Step * -1.0);
 		if (Current_angle <= 0.0)
 			Current_angle = 360.0;
 		Current_angle -= (Step * 180.0 / M_PI);

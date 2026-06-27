@@ -1,3 +1,5 @@
+#define _USE_MATH_DEFINES
+
 #include "Point.hpp"
 #include "Vector3d.h"
 #include <math.h>
@@ -73,6 +75,21 @@ double Point::getY() const
 double Point::getZ() const
 {
 	return Cordinates.Z;
+}
+
+Point Point::ProjectPoint(const Point& point, double fov, double aspectRatio, double near, double far, double cameraDistance)
+{
+	double scale = tan(fov * 0.5 * M_PI / 180) * near;
+	double r = aspectRatio * scale;
+	double l = -r;
+	double t = scale;
+	double b = -t;
+
+	double x = (2 * near / (r - l)) * point.getX() / point.getZ();
+	double y = (2 * near / (t - b)) * point.getY() / point.getZ();
+	double z = -(far + near) / (far - near) * point.getZ() - (2 * far * near) / (far - near);
+
+	return Point(x * cameraDistance, y * cameraDistance, z);
 }
 
 

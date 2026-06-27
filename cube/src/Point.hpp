@@ -20,6 +20,8 @@ public:
 	Point& operator=(const Point& point);
 	void Rotate(double _angle, Vector3dAxis _axis);
 
+	static Point ProjectPoint(const Point& point, double fov, double aspectRatio, double near, double far, double cameraDistance);
+
 private:
 	Vector3d Cordinates; 
 	bool Visible;
