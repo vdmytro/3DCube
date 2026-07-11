@@ -11,3 +11,4 @@ Old Cube
 
 New Cube
 <img width="2353" height="1212" alt="image" src="https://github.com/user-attachments/assets/ee7ce88b-24e2-48b7-a178-966da066400c" />
+![](doc/tmp_a0af39a8-1440-4951-ae10-5a06828012f6.gif)
