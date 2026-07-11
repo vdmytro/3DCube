@@ -1,5 +1,5 @@
 #include "Vector3d.h"
-#include <math.h>
+#include <cmath>
 
 bool Vector3d::operator==(const Vector3d& vec)
 {
@@ -94,7 +94,7 @@ Vector3d& Vector3d::operator*=(double value)
 double Vector3d::DotProduct(const Vector3d& vec) const
 {
 	double result = X * vec.X + Y * vec.Y + Z * vec.Z;
-	return 0.0;
+	return result;
 }
 
 Vector3d Vector3d::CrossProduct(const Vector3d& vec) const
@@ -120,15 +120,15 @@ double Vector3d::getSquaredSize() const
 Vector3d Vector3d::Norm() const
 {
 	const double size = getSize();
-	Vector3d norm = *this / size;
-	norm *= -1.0; 
+	const Vector3d norm = *this / size;
 	return norm;
 }
 
 Vector3d Vector3d::InvertNorm() const
 {
 	const double size = getSize();
-	const Vector3d invNorm = *this / size;
+	Vector3d invNorm = *this / size;
+	invNorm *= -1.0;
 	return invNorm;
 }
 

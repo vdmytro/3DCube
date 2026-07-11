@@ -2,7 +2,7 @@
 
 #include "Cuboid.hpp"
 #include <string>
-#include <math.h>
+#include <cmath>
 
 
 Cuboid::Cuboid() {
@@ -56,7 +56,6 @@ void Cuboid::SetScale(double _scale)
 
 void Cuboid::RotateCube(SHORT & _X, SHORT & _Y,SHORT& _Z, SHORT & _TimeX, SHORT & _TimeY, SHORT& _TimeZ) 
 {
-	double distance = 1.0;
 	double Step = 0.02;
 	if (_X < _TimeX) {
 

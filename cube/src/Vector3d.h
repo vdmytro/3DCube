@@ -6,6 +6,9 @@ enum Vector3dAxis {
 
 struct Vector3d
 {
+	//X = Roll
+	//Y = Pitch
+	//Z = Yaw
 	double X = 0.0, Y = 0.0, Z = 0.0;
 	//---------------------------------------------------------
 	Vector3d() {}
@@ -35,8 +38,14 @@ struct Vector3d
 	Vector3d InvertNorm() const;
 	//---------------------------------------------------------
 	Vector3d& Rotate(double angle, Vector3dAxis axisType);
+	//---------------------------------------------------------
+	inline const double Roll() const { return X; }
+	inline const double Pitch() const { return Y; }
+	inline const double Yaw() const { return Z; }
+	//---------------------------------------------------------
 };
 
 static const Vector3d VectorX{ 1.0,0.0,0.0 };
 static const Vector3d VectorY{ 0.0,1.0,0.0 };
 static const Vector3d VectorZ{ 0.0,0.0,1.0 };
+static const Vector3d ZeroVector{ 0.0,0.0,0.0 };

@@ -2,13 +2,16 @@
 
 #include "Point.hpp"
 #include "Vector3d.h"
-#include <math.h>
+#include <cmath>
 
+
+static int globalIndex = 0;
 
 Point::Point()
 {
 	Cordinates = Vector3d{ 0,0,0 };
 	Visible = true;
+	index = globalIndex++;
 }
 
 /**********************************************/
@@ -54,6 +57,11 @@ Point& Point::operator=(const Point& point)
 void Point::Rotate(double _angle, Vector3dAxis _axis)
 {
 	Cordinates.Rotate(_angle, _axis);
+}
+
+int Point::GetIndex()
+{
+	return index;
 }
 
 bool

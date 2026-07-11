@@ -1,5 +1,14 @@
 #include "Polygon.h"
 #include "Point.hpp"
+#include "Camera.h"
+
+extern unsigned int screenWidth;
+extern unsigned int screenHeight;
+
+void PolDraw(HDC _hdc, POINT* apt, int cpt)
+{
+	Polygon(_hdc, apt, cpt);
+}
 
 Render::Polygon::Polygon()
 {
@@ -35,22 +44,42 @@ Render::Polygon& Render::Polygon::operator=(const Polygon& polygon)
 
 void Render::Polygon::Draw(HWND&, HDC& _hdc, RECT& _rt)
 {
-	double fov = 90.0; // Field of view
-	double aspectRatio = static_cast<double>(_rt.right) / static_cast<double>(_rt.bottom);
-	double _near = 0.00001;
-	double _far = 1000000.0;
-	double cameraDistance = 200.0;
-
-	Point projectedPoints[3];
+	constexpr int sz = 5;
+	Vector3d projectedPoints[3];
+	POINT trianglePoints[3];
 	for (int i = 0; i < 3; ++i)
 	{
-		projectedPoints[i] = *polygonPonts[i];//Point::ProjectPoint(*polygonPonts[i], fov, aspectRatio, _near, _far, cameraDistance);
+
+		int x, y;
+		float isBehind = gCamera.WorldToScreen(polygonPonts[i]->GetCordinates(), x, y);//Point::ProjectPoint(*polygonPonts[i], fov, aspectRatio, _near, _far, cameraDistance);
+		if (!isBehind)
+		{
+			static char buf[80];
+			Rectangle(_hdc, x - sz, y - sz, x + sz, y + sz);
+			TextOut(_hdc, x, y, (LPCWSTR)buf, wsprintf((LPWSTR)buf, L"%i", polygonPonts[i]->GetIndex()));
+		}
+		projectedPoints[i].X = x;
+		projectedPoints[i].Y = y;
+		trianglePoints[i].x = x;
+		trianglePoints[i].y = y;
 	}
 
-	MoveToEx(_hdc, static_cast<int>((static_cast<double>(_rt.right) / 2.0 + projectedPoints[0].getX())), static_cast<int>((static_cast<double>(_rt.bottom) / 2.0 - projectedPoints[0].getY())), NULL);
-	LineTo(_hdc, static_cast<int>((static_cast<double>(_rt.right) / 2.0 + projectedPoints[1].getX())), static_cast<int>((static_cast<double>(_rt.bottom) / 2.0 - projectedPoints[1].getY())));
-	LineTo(_hdc, static_cast<int>((static_cast<double>(_rt.right) / 2.0 + projectedPoints[2].getX())), static_cast<int>((static_cast<double>(_rt.bottom) / 2.0 - projectedPoints[2].getY())));
-	LineTo(_hdc, static_cast<int>((static_cast<double>(_rt.right) / 2.0 + projectedPoints[0].getX())), static_cast<int>((static_cast<double>(_rt.bottom) / 2.0 - projectedPoints[0].getY())));
+	// Create a solid blue brush
+	//HBRUSH hBrush = CreateSolidBrush(RGB(rand()%255, rand() % 255, rand() % 255));
+	//HGDIOBJ hOldBrush = SelectObject(_hdc, hBrush);
+
+	// Draw the triangle
+	//PolDraw(_hdc, trianglePoints, 3);
+
+	// Clean up resources
+	//SelectObject(_hdc, hOldBrush);
+	//DeleteObject(hBrush);
+
+
+	MoveToEx(_hdc, static_cast<int>(projectedPoints[0].X), static_cast<int>(projectedPoints[0].Y), NULL);
+	LineTo(_hdc, static_cast<int>(projectedPoints[1].X), static_cast<int>(projectedPoints[1].Y));
+	LineTo(_hdc, static_cast<int>(projectedPoints[2].X), static_cast<int>(projectedPoints[2].Y));
+	LineTo(_hdc, static_cast<int>(projectedPoints[0].X), static_cast<int>(projectedPoints[0].Y));
 }
 
 void Render::Polygon::AddPoints(Point& p1, Point& p2, Point& p3)

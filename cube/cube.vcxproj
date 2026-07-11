@@ -158,8 +158,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\cube.h" />
     <ClInclude Include="src\Cuboid.hpp" />
+    <ClInclude Include="src\Matrix4.h" />
     <ClInclude Include="src\Point.hpp" />
     <ClInclude Include="src\Polygon.h" />
     <ClInclude Include="src\Resource.h" />
@@ -167,6 +169,8 @@
     <ClInclude Include="src\Vector4d.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\Matrix4.cpp" />
     <ClCompile Include="src\Polygon.cpp" />
     <ClCompile Include="src\cube.cpp" />
     <ClCompile Include="src\Cuboid.cpp" />

@@ -13,6 +13,8 @@ namespace Render
 		Polygon(Point& p1, Point& p2, Point& p3);
 		~Polygon();
 
+		
+
 		Polygon& operator=(const Polygon& polygon);
 
 		void Draw(HWND&, HDC&, RECT&);
@@ -21,4 +23,3 @@ namespace Render
 		Point* polygonPonts[3];
 	};
 }
-
